@@ -12,22 +12,39 @@ public class Main {
     public static void main(String[] args) {
 
         Database database = new Database();
-            List<ItemCardapio> itens = database.listaItensCardapio();
-  // dona florinda quer saber quantos itens ela tem de cada categoria no cardapio
-        // categoria ==> quantidade
+        List<ItemCardapio>itens = database.listaItensCardapio();
+        Optional<ItemCardapio> itensPorId = database.buscaItemCardapioPorId(1L);
+        if(itensPorId.isPresent()) {
+            System.out.println(itensPorId.get());
 
-
-        Map<ItemCardapio.CategoriaCardapio, Integer> itensPorCategoria = new HashMap<>();
-        for (ItemCardapio item : itens) {
-            ItemCardapio.CategoriaCardapio categoriaCardapio =  item.categoria();
-            if(itensPorCategoria.containsKey(categoriaCardapio)) {
-                
-            }
         }
 
+
+
+        // dona florinda quer saber quantos itens ela tem de cada categoria no cardapio
+        // categoria ==> quantidade
+
+//        itens.forEach((itemCardapio, id) -> itemCardapio.id());
+
+        Map<ItemCardapio.CategoriaCardapio, Integer> itensPorCategoria = new LinkedHashMap<>();
+
+
+//           ItemCardapio.CategoriaCardapio categoriaCardapio =  item.categoria();
+//           if(!itensPorCategoria.containsKey(categoriaCardapio)) {
+//               itensPorCategoria.put(categoriaCardapio, 1);
+//               itens.forEach(itemCardapio -> System.out.println(itemCardapio.id()));
+//           } else {
+//               Integer quantidadeAnterior = itensPorCategoria.get(categoriaCardapio);
+//               itensPorCategoria.put(categoriaCardapio, quantidadeAnterior + 1);
+//
+//           }
+//        }
+//        System.out.println(itensPorCategoria);
+
+
 //        Comparator<ItemCardapio.CategoriaCardapio> comparadorPorNome = Comparator.comparing(ItemCardapio.CategoriaCardapio::name);
-//        Set<ItemCardapio.CategoriaCardapio> categorias = new TreeSet<>(comparadorPorNome); // arvore rubro negra
-//        for (ItemCardapio itemCardapio : itens) {
+//        Set<ItemCardapio.CategoriaCardapio> categorias = new TreeSet<>(); // arvore rubro negra
+//       for (ItemCardapio itemCardapio : itens) {
 //            ItemCardapio.CategoriaCardapio categoria = itemCardapio.categoria();
 //            categorias.add(categoria);
 //        }
@@ -38,9 +55,15 @@ public class Main {
 //
 //        itens.stream()
 //                .map(ItemCardapio::categoria)
-//                .collect(Collectors.toCollection(() -> new TreeSet<>((comparadorPorNome))))
+//                .collect(Collectors.toCollection(TreeSet::new))
 //                .forEach(System.out::println);
-// jeito funcional de fazer
-    }
+        //jeito funcional de fazer
 
+//        itens.stream().collect(Collectors.groupingBy(ItemCardapio::categoria,
+//                 Collectors.counting()
+//                )).forEach((chave, valor) -> System.out.println(chave + "=> " + valor));
+//    }
+
+
+    }
 }
