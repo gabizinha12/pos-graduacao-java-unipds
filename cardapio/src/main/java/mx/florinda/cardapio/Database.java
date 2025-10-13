@@ -60,10 +60,15 @@ public class Database {
     }
 
     public Optional<ItemCardapio> buscaItemCardapioPorId(Long id) {
-      return  Optional.of(itensPorId.get(id));
+        ItemCardapio itemCardapio = itensPorId.get(id);
+        return Optional.ofNullable(itemCardapio); // o itemCardapio pode não existir, caso não exista retorna um optional vazio
     }
 
 
+    public boolean removerItemCardapio(Long id) {
+        ItemCardapio itemRemovido = itensPorId.remove(id);
+        return  itemRemovido != null;
 
+    }
 }
 
