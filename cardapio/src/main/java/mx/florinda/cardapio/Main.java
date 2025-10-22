@@ -1,17 +1,14 @@
 package mx.florinda.cardapio;
 
-import com.google.gson.Gson;
-
-import javax.xml.stream.events.EntityReference;
 import java.math.BigDecimal;
 import java.util.*;
-import java.util.stream.Collectors;
 
 import static java.lang.Thread.sleep;
 import static mx.florinda.cardapio.ItemCardapio.CategoriaCardapio.*;
 
 public class Main {
     public static void main(String[] args) throws InterruptedException {
+
 
         Database database = new Database();
         List<ItemCardapio> itens = database.listaItensCardapio();
@@ -70,13 +67,34 @@ public class Main {
 
         database.listaItensCardapio().forEach(System.out::println);
 
+        ItemCardapio item1 = new ItemCardapio(1L, "Refresco", "", BEBIDAS, new BigDecimal("2.99"), null);
+        ItemCardapio item2 = new ItemCardapio(1L, "Refresco", "", BEBIDAS, new BigDecimal("3.99"), null);
+        ItemCardapio item3 = new ItemCardapio(1L, "Refresco", "", BEBIDAS, new BigDecimal("2.99"), null);
 
-        System.out.println("Solicitando GC....");
-        System.gc();
-        Thread.sleep(500);
+        System.out.println(item1.hashCode() ==  item3.hashCode());
+        System.out.println(item1.equals(item3));
 
-        historicoVisualizacao.mostrarTotalVisualizados();
-        historicoVisualizacao.listarVisualizacoes();
+
+//        System.out.println("Solicitando GC....");
+//        System.gc();
+//        Thread.sleep(500);
+//
+//        historicoVisualizacao.mostrarTotalVisualizados();
+//        historicoVisualizacao.listarVisualizacoes();
+//
+//        ItemCardapio item = database.buscaItemCardapioPorId(2L).orElseThrow();
+//        System.out.printf("\n%s (%d) R$ %s", item.nome(), item.id(), item.preco());
+//
+//      database.alterarPrecoItemCardapio(2L, new BigDecimal("3.99"));
+//      database.alterarPrecoItemCardapio(2L, new BigDecimal("2.99"));
+//      database.alterarPrecoItemCardapio(2L, new BigDecimal("1.99"));
+//
+//        System.out.printf("\n%s (%d) R$ %s", item.nome(), item.id(), item.preco());
+//
+//
+//        // precisa auditar a mudança de preço dos itens
+//        database.imprimirRastroAuditoriaPrecos();
+
 
 
 

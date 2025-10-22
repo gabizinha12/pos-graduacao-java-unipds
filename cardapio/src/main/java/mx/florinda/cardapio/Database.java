@@ -6,7 +6,8 @@ import java.util.*;
 import static mx.florinda.cardapio.ItemCardapio.CategoriaCardapio.*;
 
 public class Database {
-    Map<Long, ItemCardapio> itensPorId = new HashMap<>();
+    private final Map<Long, ItemCardapio> itensPorId = new HashMap<>();
+    private final  Map<ItemCardapio, BigDecimal> auditoriaPreco = new HashMap<>();
 
     public Database() {
         var refrescoDoChaves = new ItemCardapio(1L, "Refresco do Chaves",
@@ -69,6 +70,24 @@ public class Database {
         ItemCardapio itemRemovido = itensPorId.remove(id);
         return  itemRemovido != null;
 
+    }
+
+    public boolean alterarPrecoItemCardapio(long itemId, BigDecimal novoPreco) {
+        ItemCardapio itemAntigo = itensPorId.get(itemId);
+        if(itemAntigo == null) {
+            return false;
+        }
+        ItemCardapio itemComPrecoAlterado =  itemAntigo.alterarPreco(novoPreco);
+        itensPorId.put(itemId, itemComPrecoAlterado);
+        auditoriaPreco.put(itemAntigo, novoPreco);
+        return  true;
+    }
+
+    public void imprimirRastroAuditoriaPrecos() {
+        System.out.println("\nAuditoria de precos:  ");
+        auditoriaPreco.forEach((itemAntigo, novoPreco) -> {
+            System.out.printf(" -  %s: %s => %s\n", itemAntigo.nome(), itemAntigo.preco(), novoPreco);
+        });
     }
 }
 
