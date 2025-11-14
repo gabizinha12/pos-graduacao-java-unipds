@@ -89,5 +89,11 @@ public class Database {
             System.out.printf(" -  %s: %s => %s\n", itemAntigo.nome(), itemAntigo.preco(), novoPreco);
         });
     }
+
+    public void criarItem(ItemCardapio itemCardapio) {
+        itensPorId.put(itemCardapio.id(), itemCardapio);
+    }
+
+
 }
 
